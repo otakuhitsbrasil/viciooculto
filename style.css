@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --black: #050505;
+    --dark-grey: #0a0a0a;
+    --gold: #D4AF37;
+    --gold-muted: #C5A028;
+    --gold-dark: #996515;
+    --text: #E0E0E0;
+    --text-muted: #A0A0A0;
+    --font-title: 'Playfair Display', serif;
+    --font-body: 'Cormorant Garamond', serif;
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--black);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Noise Texture Overlay */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-title);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold);
+}
+
+p {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Decorative Elements */
+.gold-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.border-corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--gold-dark);
+}
+
+.top-left { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.top-right { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+.bottom-left { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+.bottom-right { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* Sections */
+section {
+    padding: 100px 0;
+    position: relative;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    padding: 100px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: radial-gradient(circle at center, #1a1a1a 0%, var(--black) 100%);
+}
+
+.hero-content {
+    z-index: 2;
+    max-width: 900px;
+    padding: 2rem 0;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-style: italic;
+}
+
+.hero-image-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    filter: grayscale(1) brightness(0.5);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* CTA Buttons */
+.cta-button {
+    display: inline-block;
+    padding: 1.2rem 3.5rem;
+    background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+    color: var(--black);
+    text-decoration: none;
+    font-family: var(--font-title);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 2px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+}
+
+.cta-button::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: rotate(45deg);
+    transition: 0.8s;
+}
+
+.cta-button:hover::after {
+    left: 100%;
+}
+
+/* Pain Sections (Personas) */
+.pain-section {
+    background: var(--dark-grey);
+}
+
+.persona-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 6rem;
+}
+
+.persona-grid.reverse {
+    direction: rtl;
+}
+
+.persona-grid.reverse .persona-content {
+    direction: ltr;
+}
+
+.persona-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border: 1px solid var(--gold-dark);
+    padding: 10px;
+    background: var(--black);
+    position: relative;
+}
+
+.persona-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.persona-content .pain-quote {
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--gold-muted);
+    margin-bottom: 2rem;
+    border-left: 3px solid var(--gold);
+    padding-left: 1.5rem;
+}
+
+.persona-content ul {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.persona-content li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.persona-content li::before {
+    content: "✕";
+    color: #ff4444;
+    margin-right: 1rem;
+    font-weight: bold;
+}
+
+/* The Protocol Section */
+.protocol-section {
+    background: radial-gradient(circle at bottom, #1a1a1a 0%, var(--black) 100%);
+    text-align: center;
+}
+
+.protocol-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.feature-card {
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 3rem;
+    transition: var(--transition);
+}
+
+.feature-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-10px);
+}
+
+.feature-card i {
+    font-size: 3rem;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+/* Price Section */
+.price-section {
+    text-align: center;
+    background: var(--black);
+    padding: 120px 0;
+}
+
+.price-card {
+    max-width: 500px;
+    margin: 0 auto;
+    border: 2px solid var(--gold);
+    padding: 4rem 2rem;
+    background: linear-gradient(180deg, #111 0%, #000 100%);
+    position: relative;
+}
+
+.price-old {
+    text-decoration: line-through;
+    color: #ff4444;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.price-new {
+    font-size: 5rem;
+    font-family: var(--font-title);
+    color: var(--gold);
+    font-weight: 900;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.price-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+}
+
+/* Guarantee */
+.guarantee {
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.guarantee-badge {
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--gold);
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .persona-grid, .persona-grid.reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+    }
+    
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+    
+    section {
+        padding: 60px 0;
+    }
+}
+
+/* Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
